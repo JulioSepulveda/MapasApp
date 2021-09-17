@@ -1,0 +1,32 @@
+<!-- En vez de usar el id usamos la referencia local #mapa para que no haya problemas si en otra de las paginas tenemos otro
+     mapa con el mismo id -->
+<div #mapa class="mapa-container"></div>
+
+<div class="row">
+    <div class="col">
+        <label class="form-label">
+            Zoom: {{ zoomLevel | number:'2.2-2' }}
+            - Lng, Lat: [{{ center[0] | number:'2.4-4' }}, {{ center[1] | number:'2.4-4' }}]
+        </label>
+        <!-- El input le indicamos que tenga el valor de zoomLevel, con un minimo y maximo y que si cambia llame al metodo
+             zoomInput para que asi varie el zoom -->
+        <input type="range" 
+               class="form-range"
+               [value]="zoomLevel"
+               min="0"
+               max="18"
+               (input)="zoomCambio( zoomInput.value )"
+               #zoomInput>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary"
+                (click)="zoomOut()"> 
+            -
+        </button>
+        <button class="btn btn-primary float-end"
+                (click)="zoomIn()"> 
+            +
+        </button>
+    </div>
+</div>
